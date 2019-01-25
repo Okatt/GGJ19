@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class block : MonoBehaviour
+public class Block : MonoBehaviour
 {
-    public enum BlockType { Empty, Cat, Box };
+    public enum BlockType { Box, Cat, Empty, Noisy, Rough, Warm };
 
     public BlockType type;
 }

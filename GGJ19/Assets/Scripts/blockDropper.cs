@@ -1,15 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class blockDropper : MonoBehaviour
+public class BlockDropper : MonoBehaviour
 {
     public GameObject blockPrefab;
     private GameObject currentBlock;
 
+    private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
+
+    private static System.Random RNG = new System.Random();
+
     void Start()
     {
         currentBlock = Instantiate(blockPrefab, transform);
+        currentBlock.GetComponent<Block>().type = Block.BlockType.Cat;
     }
 
     // Update is called once per frame
@@ -28,6 +34,7 @@ public class blockDropper : MonoBehaviour
         if (!currentBlock && Input.GetKeyDown(KeyCode.UpArrow))
         {
             currentBlock = Instantiate(blockPrefab, transform);
+            currentBlock.GetComponent<Block>().type = (Block.BlockType)blockTypeValues.GetValue(RNG.Next(blockTypeValues.Length));
         }
 
         if (currentBlock && Input.GetKeyDown(KeyCode.DownArrow))
