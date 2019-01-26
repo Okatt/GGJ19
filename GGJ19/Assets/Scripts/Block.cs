@@ -10,15 +10,18 @@ public class Block : MonoBehaviour
 
     private BoxCollider2D boxCollider;
 
-    // Attitude 
-    // TODO: maintain a list of likes and dislikes.
+    // Attitude
+    public int mood;
+    public List<AttitudeData> attitude;
 
     // Raycasts to check neighbours
     public LayerMask collisionMask;
     private RaycastOrigins raycastOrigins;
     private float rayLength = 0.2f;
 
+    private Color rayColour;
     private Color rayColourGood = Color.green;
+    private Color rayColourNeutral = Color.grey;
     private Color rayColourBad = Color.red;
 
     void Start()
@@ -31,54 +34,80 @@ public class Block : MonoBehaviour
         UpdateRaycastOrigins();
 
         // TODO: only check whenever it makes sense, when the last dropped block has a velocity of 0?
-        GetScore();
+        UpdateMood();
     }
 
-    int GetScore()
+    private void UpdateMood()
     {
-        // Keep track of score
-        int score = 0;
+        // Recalculate mood
+        mood = 0;
 
         // Check neighbours
         RaycastHit2D hitLeft = Physics2D.Raycast(raycastOrigins.left, new Vector3(-1, 0), rayLength, collisionMask);
         if (hitLeft)
         {
             GameObject other = hitLeft.collider.gameObject;
-            Debug.DrawRay(raycastOrigins.left, new Vector3(-1, 0) * rayLength, rayColourGood);
+            int attitude = GetAttitude(other.GetComponent<Block>().type);
+
+            if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
+            else { rayColour = rayColourNeutral; }
+            Debug.DrawRay(raycastOrigins.left, new Vector3(-1, 0) * rayLength, rayColour);
+
+            mood += attitude;            
         }
 
         RaycastHit2D hitRight = Physics2D.Raycast(raycastOrigins.right, new Vector3(1, 0), rayLength, collisionMask);
         if (hitRight)
         {
             GameObject other = hitRight.collider.gameObject;
-            Debug.DrawRay(raycastOrigins.right, new Vector3(1, 0) * rayLength, rayColourGood);
+            int attitude = GetAttitude(other.GetComponent<Block>().type);
+
+            if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
+            else { rayColour = rayColourNeutral; }
+            Debug.DrawRay(raycastOrigins.right, new Vector3(1, 0) * rayLength, rayColour);
+
+            mood += attitude;
         }
 
         RaycastHit2D hitTop = Physics2D.Raycast(raycastOrigins.top, new Vector3(0, 1), rayLength, collisionMask);
         if (hitTop)
         {
             GameObject other = hitTop.collider.gameObject;
-            Debug.DrawRay(raycastOrigins.top, new Vector3(0, 1) * rayLength, rayColourGood);
+            int attitude = GetAttitude(other.GetComponent<Block>().type);
+
+            if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
+            else { rayColour = rayColourNeutral; }
+            Debug.DrawRay(raycastOrigins.top, new Vector3(0, 1) * rayLength, rayColour);
+
+            mood += attitude;
         }
 
         RaycastHit2D hitBottom = Physics2D.Raycast(raycastOrigins.bottom, new Vector3(0, -1), rayLength, collisionMask);
         if (hitBottom)
         {
             GameObject other = hitBottom.collider.gameObject;
-            Debug.DrawRay(raycastOrigins.bottom, new Vector3(0, -1) * rayLength, rayColourGood);
-        }
+            int attitude = GetAttitude(other.GetComponent<Block>().type);
 
-        return score;
+            if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
+            else { rayColour = rayColourNeutral; }
+            Debug.DrawRay(raycastOrigins.bottom, new Vector3(0, -1) * rayLength, rayColour);
+
+            mood += attitude;  
+        }
     }
 
     // Returns the this block's attitude of type, value can be positive or negative.
-    int GetAttitude(BlockType type)
+    private int GetAttitude(BlockType type)
     {
-        // TODO: check this block's attitude toward type.
+        for (int i = 0; i < attitude.Count; i++)
+        {
+            AttitudeData data = attitude[i];
+            if (data.type == type) return data.value;
+        }
         return 0;
     }
 
-    void UpdateRaycastOrigins()
+    private void UpdateRaycastOrigins()
     {
         Bounds bounds = boxCollider.bounds;
         bounds.Expand(0.1f);
@@ -89,7 +118,14 @@ public class Block : MonoBehaviour
         raycastOrigins.bottom = new Vector2(bounds.center.x, bounds.min.y);
     }
 
-    struct RaycastOrigins
+    [System.Serializable]
+    public struct AttitudeData
+    {
+        public BlockType type;
+        public int value;
+    }
+
+    private struct RaycastOrigins
     {
         public Vector2 left, right, bottom, top;
     }
