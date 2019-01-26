@@ -7,9 +7,11 @@ public class BlockDropper : MonoBehaviour
 {
     // TODO: list of prefabs
     public GameObject blockPrefab;
+    public GameObject blockFactoryPrefab;
 
     private BoxCollider2D boxCollider;
     private GameObject currentBlock;
+    private GameObject blockFactory;
 
     private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
     private static System.Random RNG = new System.Random();
@@ -18,6 +20,7 @@ public class BlockDropper : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
         currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
         // TODO: set random block types
     }
 
@@ -49,7 +52,7 @@ public class BlockDropper : MonoBehaviour
         // Spawn a new block
         if (!currentBlock)
         {
-            currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
             // TODO: set random block types
         }
     }
