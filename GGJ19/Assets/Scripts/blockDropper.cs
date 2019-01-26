@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +10,15 @@ public class BlockDropper : MonoBehaviour
     private BoxCollider2D boxCollider;
     private GameObject currentBlock;
 
+    private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
+
+    private static System.Random RNG = new System.Random();
+
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        currentBlock.GetComponent<Block>().type = Block.BlockType.Cat;
     }
 
     void Update()
