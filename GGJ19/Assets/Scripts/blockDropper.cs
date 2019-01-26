@@ -11,7 +11,6 @@ public class BlockDropper : MonoBehaviour
     private GameObject currentBlock;
 
     private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
-
     private static System.Random RNG = new System.Random();
 
     void Start()
@@ -47,6 +46,10 @@ public class BlockDropper : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         // Spawn a new block
-        if (!currentBlock) currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        if (!currentBlock)
+        {
+            currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            //TODO: add RNG to block type
+        }    
     }
 }
