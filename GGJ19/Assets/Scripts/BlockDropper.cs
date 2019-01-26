@@ -18,13 +18,17 @@ public class BlockDropper : MonoBehaviour
 
     private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
 
+    private void Awake()
+    {
+        scoreTracker = Instantiate(scoreTrackerPrefab, new Vector3(-5, 5, transform.position.z), Quaternion.identity);
+        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(5, -1, transform.position.z), Quaternion.identity);
+    }
+
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(5, -1, transform.position.z), Quaternion.identity);
-        scoreTracker = Instantiate(scoreTrackerPrefab, new Vector3(-5, 5, transform.position.z), Quaternion.identity);
         currentCats = new List<GameObject>();
         // TODO: set random block types
     }
