@@ -8,10 +8,13 @@ public class BlockDropper : MonoBehaviour
     // TODO: list of prefabs
     public GameObject blockPrefab;
     public GameObject blockFactoryPrefab;
+    public GameObject scoreTrackerPrefab;
+    public List<GameObject> currentCats;
 
     private BoxCollider2D boxCollider;
     private GameObject currentBlock;
     private GameObject blockFactory;
+    public GameObject scoreTracker;
 
     private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
 
@@ -21,6 +24,8 @@ public class BlockDropper : MonoBehaviour
         currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         blockFactory = Instantiate(blockFactoryPrefab, new Vector3(5, -1, transform.position.z), Quaternion.identity);
+        scoreTracker = Instantiate(scoreTrackerPrefab, new Vector3(-5, 5, transform.position.z), Quaternion.identity);
+        currentCats = new List<GameObject>();
         // TODO: set random block types
     }
 
@@ -43,6 +48,11 @@ public class BlockDropper : MonoBehaviour
         if (currentBlock && Input.GetKeyDown(KeyCode.DownArrow))
         {
             currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            if(currentBlock.GetComponent<Block>().type == Block.BlockType.Cat)
+            {
+                currentCats.Add(currentBlock);
+                Invoke("UpdateMoodScore", 2);
+            }
             currentBlock = null;
         }
     }
@@ -57,5 +67,10 @@ public class BlockDropper : MonoBehaviour
           
             // TODO: set random block types
         }
+    }
+
+    private void UpdateMoodScore()
+    {
+        scoreTracker.GetComponent<ScoreTracker>().UpdateScore(currentCats);
     }
 }
