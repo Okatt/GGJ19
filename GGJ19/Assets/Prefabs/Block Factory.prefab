@@ -143,3 +143,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockPrefab: {fileID: 5778653552394045946, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
     type: 3}
+  cats:
+  - {fileID: 2035522982383556726, guid: cce93fffc6e55ab4ca841b60ebc257f3, type: 3}
+  objects:
+  - {fileID: 322381997047739856, guid: 60e745ee77ce9404da9fd964ccfdc3cb, type: 3}
+  - {fileID: 348407416372455162, guid: 1f4ca8c5c2019aa4d8c9343c27f45c16, type: 3}
+  - {fileID: 1047993268848709777, guid: 77e1f50b3674eb94fadeabce2ea45795, type: 3}
+  - {fileID: 4591080282093229925, guid: 0b17443af7fbb2242a23d890ffdac888, type: 3}
+  - {fileID: 1139125558837811159, guid: 013085cd687214e4a842786e616eea40, type: 3}
