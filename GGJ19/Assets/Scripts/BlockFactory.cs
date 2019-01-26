@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class BlockFactory : MonoBehaviour
 {
-    public GameObject blockPrefab;
+    public List<GameObject> cats;
+    public List<GameObject> objects;
 
+    private System.Random random = new System.Random();
     private Queue<GameObject> blocks;
+    private readonly double catRatio = 0.3;
 
     // Start is called before the first frame update
     void Start()
@@ -15,9 +18,17 @@ public class BlockFactory : MonoBehaviour
         blocks = new Queue<GameObject>();
         for (int i = 0; i < 5; i++)
         {
-            GameObject newBlock = Instantiate(blockPrefab, new Vector3(5, 0 + i, transform.position.z), Quaternion.identity);
-            newBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-            blocks.Enqueue(newBlock);
+            if (random.NextDouble() < catRatio)
+            {
+                int listNumber = random.Next(cats.Count);
+                GameObject newBlock = Instantiate(cats[listNumber], new Vector3(5, 3 + i, transform.position.z), Quaternion.identity);
+                blocks.Enqueue(newBlock);
+            } else
+            {
+                int listNumber = random.Next(objects.Count);
+                GameObject newBlock = Instantiate(objects[listNumber], new Vector3(5, 3 + i, transform.position.z), Quaternion.identity);
+                blocks.Enqueue(newBlock);
+            }
         }
     }
 
@@ -30,16 +41,24 @@ public class BlockFactory : MonoBehaviour
     public GameObject GetNextBlock()
     {
         var returnBlock = blocks.Dequeue();
-        returnBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        returnBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         Invoke("SpawnNextBlock", 0.5f);
         return returnBlock;
     }
 
     private void SpawnNextBlock()
     {
-        GameObject newBlock = Instantiate(blockPrefab, new Vector3(5, 7, transform.position.z), Quaternion.identity);
-        newBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        blocks.Enqueue(newBlock);
-        Debug.Log("Block spawned");
+        if (random.NextDouble() < catRatio)
+        {
+            int listNumber = random.Next(cats.Count);
+            GameObject newBlock = Instantiate(cats[listNumber], new Vector3(5, 7, transform.position.z), Quaternion.identity);
+            blocks.Enqueue(newBlock);
+        }
+        else
+        {
+            int listNumber = random.Next(objects.Count);
+            GameObject newBlock = Instantiate(objects[listNumber], new Vector3(5, 7, transform.position.z), Quaternion.identity);
+            blocks.Enqueue(newBlock);
+        }
     }
 }

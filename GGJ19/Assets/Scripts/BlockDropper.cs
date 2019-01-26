@@ -14,12 +14,12 @@ public class BlockDropper : MonoBehaviour
     private GameObject blockFactory;
 
     private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
-    private static System.Random RNG = new System.Random();
 
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+        currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         blockFactory = Instantiate(blockFactoryPrefab, new Vector3(5, -1, transform.position.z), Quaternion.identity);
         // TODO: set random block types
     }
