@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 559579055571348135}
   - component: {fileID: 9159159245694776712}
   - component: {fileID: 2814097493263051158}
+  - component: {fileID: 7432733876872781110}
   m_Layer: 8
   m_Name: Block
   m_TagString: Untagged
@@ -143,7 +144,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   mood: 0
-  attitude: []
+  attitude:
+  - type: 0
+    value: 0
+  - type: 1
+    value: 0
+  - type: 2
+    value: 0
+  - type: 3
+    value: 0
+  - type: 4
+    value: 0
   collisionMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &7432733876872781110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5778653552394045946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7484bfbb56316f941ab7929bbeae2e9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attitudeIconPrefab: {fileID: 3977544396234830127, guid: cefd4b8229455ff4395129766c0306d2,
+    type: 3}
+  nullIcon: {fileID: 21300020, guid: 5be8218aedc3822479bb6998ffdcdcf1, type: 3}
+  catIcon: {fileID: 21300012, guid: 5be8218aedc3822479bb6998ffdcdcf1, type: 3}
+  softIcon: {fileID: 21300014, guid: 5be8218aedc3822479bb6998ffdcdcf1, type: 3}
+  plantIcon: {fileID: 21300016, guid: 5be8218aedc3822479bb6998ffdcdcf1, type: 3}
+  soundIcon: {fileID: 21300018, guid: 5be8218aedc3822479bb6998ffdcdcf1, type: 3}

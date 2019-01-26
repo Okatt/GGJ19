@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    public enum BlockType { Empty, Cat, Violet, Pink, Orange, Green, Blue};
+    public enum BlockType { Empty, Cat, Soft, Plant, Sound};
 
     public BlockType type;
 
@@ -97,8 +97,10 @@ public class Block : MonoBehaviour
     }
 
     // Returns the this block's attitude of type, value can be positive or negative.
-    private int GetAttitude(BlockType type)
+    public int GetAttitude(BlockType type)
     {
+        if (attitude.Count < 0) return 0;
+
         for (int i = 0; i < attitude.Count; i++)
         {
             AttitudeData data = attitude[i];
