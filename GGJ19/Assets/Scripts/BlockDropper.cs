@@ -20,7 +20,7 @@ public class BlockDropper : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
         currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Quaternion.identity);
+        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(5, -1, transform.position.z), Quaternion.identity);
         // TODO: set random block types
     }
 
@@ -52,7 +52,9 @@ public class BlockDropper : MonoBehaviour
         // Spawn a new block
         if (!currentBlock)
         {
-            Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+            currentBlock = blockFactory.GetComponent<BlockFactory>().GetNextBlock();
+            currentBlock.transform.position = transform.position;
+          
             // TODO: set random block types
         }
     }
