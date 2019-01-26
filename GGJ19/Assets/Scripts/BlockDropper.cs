@@ -9,6 +9,7 @@ public class BlockDropper : MonoBehaviour
     public GameObject blockPrefab;
     public GameObject blockFactoryPrefab;
     public GameObject scoreTrackerPrefab;
+    public GameObject moodUpdateTriggerPrefab;
     public List<GameObject> currentCats;
 
     private BoxCollider2D boxCollider;
@@ -51,11 +52,12 @@ public class BlockDropper : MonoBehaviour
         // Drop the block
         if (currentBlock && Input.GetKeyDown(KeyCode.DownArrow))
         {
+            GameObject moodUpdateTrigger = Instantiate(moodUpdateTriggerPrefab, currentBlock.transform);
+            moodUpdateTrigger.GetComponent<TestCollider>().blockDropper = GetComponent<BlockDropper>();
             currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             if(currentBlock.GetComponent<Block>().type == Block.BlockType.Cat)
             {
                 currentCats.Add(currentBlock);
-                Invoke("UpdateMoodScore", 2);
             }
             currentBlock = null;
         }
@@ -73,7 +75,7 @@ public class BlockDropper : MonoBehaviour
         }
     }
 
-    private void UpdateMoodScore()
+    public void UpdateMoodScore()
     {
         scoreTracker.GetComponent<ScoreTracker>().UpdateScore(currentCats);
     }
