@@ -94,7 +94,7 @@ public class Block : MonoBehaviour
             newMood += attitude;  
         }
 
-        if (newMood != mood) //&& GetComponent<Rigidbody2D>().velocity == new Vector2(0,0))
+        if (newMood != mood) 
         {
             mood = newMood;
         } 
