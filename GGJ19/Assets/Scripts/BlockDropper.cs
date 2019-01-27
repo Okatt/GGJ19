@@ -8,19 +8,29 @@ public class BlockDropper : MonoBehaviour
     // TODO: list of prefabs
     public GameObject blockPrefab;
     public GameObject blockFactoryPrefab;
+    public GameObject scoreTrackerPrefab;
+    public GameObject moodUpdateTriggerPrefab;
+    public List<GameObject> currentCats;
 
     private BoxCollider2D boxCollider;
     private GameObject currentBlock;
     private GameObject blockFactory;
+    public GameObject scoreTracker;
 
     private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
+
+    private void Awake()
+    {
+        scoreTracker = Instantiate(scoreTrackerPrefab, new Vector3(-5, 5, transform.position.z), Quaternion.identity);
+        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(5, -1, transform.position.z), Quaternion.identity);
+    }
 
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
         currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(5, -1, transform.position.z), Quaternion.identity);
+        currentCats = new List<GameObject>();
         // TODO: set random block types
     }
 
@@ -42,8 +52,14 @@ public class BlockDropper : MonoBehaviour
         // Drop the block
         if (currentBlock && Input.GetKeyDown(KeyCode.DownArrow))
         {
+            GameObject moodUpdateTrigger = Instantiate(moodUpdateTriggerPrefab, currentBlock.transform);
+            moodUpdateTrigger.GetComponent<TestCollider>().blockDropper = GetComponent<BlockDropper>();
             currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
             currentBlock.GetComponent<AttitudeDisplay>().Hide();
+            if(currentBlock.GetComponent<Block>().type == Block.BlockType.Cat)
+            {
+                currentCats.Add(currentBlock);
+            }
             currentBlock = null;
         }
     }
@@ -58,5 +74,10 @@ public class BlockDropper : MonoBehaviour
           
             // TODO: set random block types
         }
+    }
+
+    public void UpdateMoodScore()
+    {
+        scoreTracker.GetComponent<ScoreTracker>().UpdateScore(currentCats);
     }
 }
