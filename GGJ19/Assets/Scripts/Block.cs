@@ -12,6 +12,7 @@ public class Block : MonoBehaviour
 
     // Attitude
     public int mood;
+    public int newMood;
     public List<AttitudeData> attitude;
 
     // Raycasts to check neighbours
@@ -31,16 +32,14 @@ public class Block : MonoBehaviour
 
     void Update()
     {
-        UpdateRaycastOrigins();
 
-        // TODO: only check whenever it makes sense, when the last dropped block has a velocity of 0?
-        UpdateMood();
     }
 
-    private void UpdateMood()
+    public void UpdateMood()
     {
         // Recalculate mood
-        mood = 0;
+        UpdateRaycastOrigins();
+        newMood = 0;
 
         // Check neighbours
         RaycastHit2D hitLeft = Physics2D.Raycast(raycastOrigins.left, new Vector3(-1, 0), rayLength, collisionMask);
@@ -53,7 +52,7 @@ public class Block : MonoBehaviour
             else { rayColour = rayColourNeutral; }
             Debug.DrawRay(raycastOrigins.left, new Vector3(-1, 0) * rayLength, rayColour);
 
-            mood += attitude;            
+            newMood += attitude;            
         }
 
         RaycastHit2D hitRight = Physics2D.Raycast(raycastOrigins.right, new Vector3(1, 0), rayLength, collisionMask);
@@ -66,7 +65,7 @@ public class Block : MonoBehaviour
             else { rayColour = rayColourNeutral; }
             Debug.DrawRay(raycastOrigins.right, new Vector3(1, 0) * rayLength, rayColour);
 
-            mood += attitude;
+            newMood += attitude;
         }
 
         RaycastHit2D hitTop = Physics2D.Raycast(raycastOrigins.top, new Vector3(0, 1), rayLength, collisionMask);
@@ -79,7 +78,7 @@ public class Block : MonoBehaviour
             else { rayColour = rayColourNeutral; }
             Debug.DrawRay(raycastOrigins.top, new Vector3(0, 1) * rayLength, rayColour);
 
-            mood += attitude;
+            newMood += attitude;
         }
 
         RaycastHit2D hitBottom = Physics2D.Raycast(raycastOrigins.bottom, new Vector3(0, -1), rayLength, collisionMask);
@@ -92,8 +91,13 @@ public class Block : MonoBehaviour
             else { rayColour = rayColourNeutral; }
             Debug.DrawRay(raycastOrigins.bottom, new Vector3(0, -1) * rayLength, rayColour);
 
-            mood += attitude;  
+            newMood += attitude;  
         }
+
+        if (newMood != mood) //&& GetComponent<Rigidbody2D>().velocity == new Vector2(0,0))
+        {
+            mood = newMood;
+        } 
     }
 
     // Returns the this block's attitude of type, value can be positive or negative.

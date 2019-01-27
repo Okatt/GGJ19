@@ -26,6 +26,7 @@ public class ScoreTracker : MonoBehaviour
         moodScore = 0;
         foreach(var cat in catlist)
         {
+            cat.GetComponent<Block>().UpdateMood();
             moodScore += cat.GetComponent<Block>().mood;
         }
     }

@@ -16,7 +16,6 @@ public class BlockFactory : MonoBehaviour
     void Awake()
     {
         blocks = new Queue<GameObject>();
-        Debug.Log("Filling queue");
         for (int i = 0; i < 5; i++)
         {
             if (random.NextDouble() < catRatio)
