@@ -21,7 +21,7 @@ public class AttitudeDisplay : MonoBehaviour
     private List<GameObject> icons;
     private Block block;
 
-    private float offset = 1;
+    private float offset = 0.8f;
 
     void Start()
     {

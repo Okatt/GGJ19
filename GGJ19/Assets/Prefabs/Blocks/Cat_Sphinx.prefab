@@ -18,6 +18,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300008, guid: 1a9b49f66e389af40b16e6d14cff8b85,
         type: 3}
+    - target: {fileID: 72017157762682107, guid: 5c69b52097ec2b64ab6742830fe617d6,
+        type: 3}
+      propertyPath: attitude.Array.data[1].value
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5428415706484192462, guid: 5c69b52097ec2b64ab6742830fe617d6,
         type: 3}
       propertyPath: m_LocalPosition.x
