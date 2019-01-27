@@ -12,6 +12,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cat_Ginger
       objectReference: {fileID: 0}
+    - target: {fileID: 1576709077520246650, guid: 5c69b52097ec2b64ab6742830fe617d6,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300002, guid: 1a9b49f66e389af40b16e6d14cff8b85,
+        type: 3}
+    - target: {fileID: 72017157762682107, guid: 5c69b52097ec2b64ab6742830fe617d6,
+        type: 3}
+      propertyPath: attitude.Array.data[3].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 72017157762682107, guid: 5c69b52097ec2b64ab6742830fe617d6,
+        type: 3}
+      propertyPath: attitude.Array.data[4].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 72017157762682107, guid: 5c69b52097ec2b64ab6742830fe617d6,
+        type: 3}
+      propertyPath: attitude.Array.data[2].value
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 5428415706484192462, guid: 5c69b52097ec2b64ab6742830fe617d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -66,27 +87,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1576709077520246650, guid: 5c69b52097ec2b64ab6742830fe617d6,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300002, guid: 5be8218aedc3822479bb6998ffdcdcf1,
-        type: 3}
-    - target: {fileID: 72017157762682107, guid: 5c69b52097ec2b64ab6742830fe617d6,
-        type: 3}
-      propertyPath: attitude.Array.data[3].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 72017157762682107, guid: 5c69b52097ec2b64ab6742830fe617d6,
-        type: 3}
-      propertyPath: attitude.Array.data[4].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 72017157762682107, guid: 5c69b52097ec2b64ab6742830fe617d6,
-        type: 3}
-      propertyPath: attitude.Array.data[2].value
-      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c69b52097ec2b64ab6742830fe617d6, type: 3}
