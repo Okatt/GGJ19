@@ -6,6 +6,10 @@ public class Block : MonoBehaviour
 {
     public enum BlockType { Empty, Cat, Soft, Plant, Sound};
 
+    public GameObject particleHappyPrefab;
+    public GameObject particleSadPrefab;
+    private GameObject particleHappy;
+    private GameObject particleSad;
     public BlockType type;
 
     private BoxCollider2D boxCollider;
@@ -30,10 +34,23 @@ public class Block : MonoBehaviour
     {
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (type == BlockType.Cat)
+        {
+            particleHappy = Instantiate(particleHappyPrefab);
+            particleHappy.transform.SetParent(transform);
+            particleHappy.transform.position = transform.position;
+            particleHappy.GetComponent<HappyMood>().ForceStopAnimation();
+            particleSad = Instantiate(particleSadPrefab, transform);
+            particleSad.transform.SetParent(transform);
+            particleSad.transform.position = transform.position;
+            particleSad.GetComponent<SadMood>().ForceStopAnimation();
+        }
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Z)) particleHappy.GetComponent<HappyMood>().InsertHappiness();
         // Set correct sprite draw order
         spriteRenderer.sortingOrder = (int) -transform.position.y;
 
@@ -101,6 +118,14 @@ public class Block : MonoBehaviour
 
         if (newMood != mood) 
         {
+            if (newMood > mood)
+            {
+                particleHappy.GetComponent<HappyMood>().InsertHappiness();
+            }
+            else
+            {
+                particleSad.GetComponent<SadMood>().InsertSadness();
+            }
             mood = newMood;
         } 
     }

@@ -142,6 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad44793651e0f4940803f622dac145e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleHappyPrefab: {fileID: 4124407988943294779, guid: f00c6cb99069fc04ea2fda75dc69754b,
+    type: 3}
+  particleSadPrefab: {fileID: 2218032316696297998, guid: 981225e5078ee354b9da4fd01fcc4e24,
+    type: 3}
   type: 0
   mood: 0
   newMood: 0
