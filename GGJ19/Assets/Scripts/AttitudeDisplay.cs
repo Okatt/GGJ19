@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class AttitudeDisplay : MonoBehaviour
 {
+    // Icons
     public GameObject attitudeIconPrefab;
 
     public Sprite nullIcon;
-    public Sprite catIcon;
+
+    public Sprite neutralBackground;
+    public Sprite positiveBackground;
+    public Sprite negativeBackground;
+
+    public Sprite affectionIcon;
     public Sprite softIcon;
     public Sprite plantIcon;
     public Sprite soundIcon;
@@ -40,7 +46,8 @@ public class AttitudeDisplay : MonoBehaviour
             if (attitude != 0)
             {
                 GameObject icon = Instantiate(attitudeIconPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-                icon.GetComponent<SpriteRenderer>().sprite = GetImage(type);
+                icon.GetComponent<AttitudeIcon>().SetBackground(attitude > 0 ? positiveBackground : negativeBackground);
+                icon.GetComponent<AttitudeIcon>().SetIcon(GetImage(type));
                 icons.Add(icon);
             }
         }
@@ -51,7 +58,7 @@ public class AttitudeDisplay : MonoBehaviour
         switch (type)
         {
             case Block.BlockType.Cat:
-                return catIcon;
+                return affectionIcon;
             case Block.BlockType.Plant:
                 return plantIcon;
             case Block.BlockType.Soft:
@@ -69,6 +76,22 @@ public class AttitudeDisplay : MonoBehaviour
         for (int i = 0; i < icons.Count; i++)
         {
             icons[i].transform.position = new Vector3(transform.position.x + offset * i + 1, transform.position.y, transform.position.z);
+        }
+    }
+
+    public void Hide()
+    {
+        for (int i = 0; i < icons.Count; i++)
+        {
+            icons[i].SetActive(false);
+        }
+    }
+
+    public void Show()
+    {
+        for (int i = 0; i < icons.Count; i++)
+        {
+            icons[i].SetActive(true);
         }
     }
 }

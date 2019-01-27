@@ -43,6 +43,7 @@ public class BlockDropper : MonoBehaviour
         if (currentBlock && Input.GetKeyDown(KeyCode.DownArrow))
         {
             currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            currentBlock.GetComponent<AttitudeDisplay>().Hide();
             currentBlock = null;
         }
     }

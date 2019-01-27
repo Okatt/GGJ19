@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 5778653552394045946, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
         type: 3}
       propertyPath: m_Name
-      value: Green
+      value: plant
       objectReference: {fileID: 0}
     - target: {fileID: 7829488888657432995, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
         type: 3}
@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 2814097493263051158, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
         type: 3}
       propertyPath: type
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0, type: 3}

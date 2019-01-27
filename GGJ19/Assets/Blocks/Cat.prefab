@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &5480396498197975436
+--- !u!1001 &2878492835348178285
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 5778653552394045946, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
         type: 3}
       propertyPath: m_Name
-      value: Cat
+      value: Block
       objectReference: {fileID: 0}
     - target: {fileID: 7829488888657432995, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
         type: 3}
@@ -66,36 +66,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814097493263051158, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
-        type: 3}
-      propertyPath: type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814097493263051158, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
-        type: 3}
-      propertyPath: attitude.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814097493263051158, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
-        type: 3}
-      propertyPath: attitude.Array.data[2].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814097493263051158, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
-        type: 3}
-      propertyPath: attitude.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814097493263051158, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
-        type: 3}
-      propertyPath: attitude.Array.data[4].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2814097493263051158, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0,
-        type: 3}
-      propertyPath: attitude.Array.data[3].value
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15bfbfc9f95a3d04d91edd8e1d35faa0, type: 3}

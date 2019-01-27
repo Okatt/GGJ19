@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class BlockFactory : MonoBehaviour
 {
+    public double catRatio = 0.3;
     public List<GameObject> cats;
     public List<GameObject> objects;
 
     private System.Random random = new System.Random();
     private Queue<GameObject> blocks;
-    private readonly double catRatio = 0.3;
 
     // Start is called before the first frame update
     void Start()
