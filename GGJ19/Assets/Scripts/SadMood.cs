@@ -8,7 +8,6 @@ public class SadMood : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Getting ParticleSystem");
         particleSystem = GetComponent<ParticleSystem>();
     }
 

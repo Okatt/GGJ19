@@ -8,7 +8,6 @@ public class HappyMood : MonoBehaviour
     
     void Awake()
     {
-        Debug.Log("Getting ParticleSystem");
         particleSystem = GetComponent<ParticleSystem>();
     }
 

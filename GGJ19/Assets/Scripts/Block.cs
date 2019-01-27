@@ -37,9 +37,7 @@ public class Block : MonoBehaviour
 
         if (type == BlockType.Cat)
         {
-            Debug.Log("Starting with particles");
             particleHappy = Instantiate(particleHappyPrefab);
-            Debug.Log("ph: " + particleHappy);
             particleHappy.transform.SetParent(transform);
             particleHappy.transform.position = transform.position;
             particleHappy.GetComponent<HappyMood>().ForceStopAnimation();
@@ -52,6 +50,7 @@ public class Block : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Z)) particleHappy.GetComponent<HappyMood>().InsertHappiness();
         // Set correct sprite draw order
         spriteRenderer.sortingOrder = (int) -transform.position.y;
 
