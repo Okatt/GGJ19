@@ -6,18 +6,16 @@ using UnityEngine;
 public class BlockDropper : MonoBehaviour
 {
     // TODO: list of prefabs
-    public GameObject blockPrefab;
     public GameObject blockFactoryPrefab;
     public GameObject scoreTrackerPrefab;
     public GameObject moodUpdateTriggerPrefab;
+
     public List<GameObject> currentCats;
 
     private BoxCollider2D boxCollider;
     private GameObject currentBlock;
     private GameObject blockFactory;
     public GameObject scoreTracker;
-
-    private Array blockTypeValues= Enum.GetValues(typeof(Block.BlockType));
 
     private void Awake()
     {
@@ -27,9 +25,10 @@ public class BlockDropper : MonoBehaviour
 
     void Start()
     {
+        currentBlock = blockFactory.GetComponent<BlockFactory>().GetNextBlock();
+        currentBlock.transform.position = transform.position;
+
         boxCollider = GetComponent<BoxCollider2D>();
-        currentBlock = Instantiate(blockPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
         currentCats = new List<GameObject>();
         // TODO: set random block types
     }
@@ -54,7 +53,7 @@ public class BlockDropper : MonoBehaviour
         {
             GameObject moodUpdateTrigger = Instantiate(moodUpdateTriggerPrefab, currentBlock.transform);
             moodUpdateTrigger.GetComponent<TestCollider>().blockDropper = GetComponent<BlockDropper>();
-            currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+            currentBlock.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;          
             currentBlock.GetComponent<AttitudeDisplay>().Hide();
             if(currentBlock.GetComponent<Block>().type == Block.BlockType.Cat)
             {
@@ -71,13 +70,12 @@ public class BlockDropper : MonoBehaviour
         {
             currentBlock = blockFactory.GetComponent<BlockFactory>().GetNextBlock();
             currentBlock.transform.position = transform.position;
-          
             // TODO: set random block types
         }
     }
 
     public void UpdateMoodScore()
-    {
+    { 
         scoreTracker.GetComponent<ScoreTracker>().UpdateScore(currentCats);
         
     }

@@ -13,9 +13,10 @@ public class BlockFactory : MonoBehaviour
     private Queue<GameObject> blocks;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         blocks = new Queue<GameObject>();
+        Debug.Log("Filling queue");
         for (int i = 0; i < 5; i++)
         {
             if (random.NextDouble() < catRatio)
