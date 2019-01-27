@@ -9,6 +9,7 @@ public class Block : MonoBehaviour
     public BlockType type;
 
     private BoxCollider2D boxCollider;
+    private SpriteRenderer spriteRenderer;
 
     // Attitude
     public int mood;
@@ -28,11 +29,15 @@ public class Block : MonoBehaviour
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
+        // Set correct sprite draw order
+        spriteRenderer.sortingOrder = (int) -transform.position.y;
 
+        DrawDebugRays();
     }
 
     public void UpdateMood()
@@ -50,7 +55,7 @@ public class Block : MonoBehaviour
 
             if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
             else { rayColour = rayColourNeutral; }
-            Debug.DrawRay(raycastOrigins.left, new Vector3(-1, 0) * rayLength, rayColour);
+            //Debug.DrawRay(raycastOrigins.left, new Vector3(-1, 0) * rayLength, rayColour);
 
             newMood += attitude;            
         }
@@ -63,7 +68,7 @@ public class Block : MonoBehaviour
 
             if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
             else { rayColour = rayColourNeutral; }
-            Debug.DrawRay(raycastOrigins.right, new Vector3(1, 0) * rayLength, rayColour);
+            //Debug.DrawRay(raycastOrigins.right, new Vector3(1, 0) * rayLength, rayColour);
 
             newMood += attitude;
         }
@@ -76,7 +81,7 @@ public class Block : MonoBehaviour
 
             if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
             else { rayColour = rayColourNeutral; }
-            Debug.DrawRay(raycastOrigins.top, new Vector3(0, 1) * rayLength, rayColour);
+            //Debug.DrawRay(raycastOrigins.top, new Vector3(0, 1) * rayLength, rayColour);
 
             newMood += attitude;
         }
@@ -89,7 +94,7 @@ public class Block : MonoBehaviour
 
             if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
             else { rayColour = rayColourNeutral; }
-            Debug.DrawRay(raycastOrigins.bottom, new Vector3(0, -1) * rayLength, rayColour);
+            //Debug.DrawRay(raycastOrigins.bottom, new Vector3(0, -1) * rayLength, rayColour);
 
             newMood += attitude;  
         }
@@ -98,6 +103,56 @@ public class Block : MonoBehaviour
         {
             mood = newMood;
         } 
+    }
+
+    public void DrawDebugRays()
+    {
+        UpdateRaycastOrigins();
+
+        // Check neighbours
+        RaycastHit2D hitLeft = Physics2D.Raycast(raycastOrigins.left, new Vector3(-1, 0), rayLength, collisionMask);
+        if (hitLeft)
+        {
+            GameObject other = hitLeft.collider.gameObject;
+            int attitude = GetAttitude(other.GetComponent<Block>().type);
+
+            if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
+            else { rayColour = rayColourNeutral; }
+            Debug.DrawRay(raycastOrigins.left, new Vector3(-1, 0) * rayLength, rayColour);
+        }
+
+        RaycastHit2D hitRight = Physics2D.Raycast(raycastOrigins.right, new Vector3(1, 0), rayLength, collisionMask);
+        if (hitRight)
+        {
+            GameObject other = hitRight.collider.gameObject;
+            int attitude = GetAttitude(other.GetComponent<Block>().type);
+
+            if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
+            else { rayColour = rayColourNeutral; }
+            Debug.DrawRay(raycastOrigins.right, new Vector3(1, 0) * rayLength, rayColour);
+        }
+
+        RaycastHit2D hitTop = Physics2D.Raycast(raycastOrigins.top, new Vector3(0, 1), rayLength, collisionMask);
+        if (hitTop)
+        {
+            GameObject other = hitTop.collider.gameObject;
+            int attitude = GetAttitude(other.GetComponent<Block>().type);
+
+            if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
+            else { rayColour = rayColourNeutral; }
+            Debug.DrawRay(raycastOrigins.top, new Vector3(0, 1) * rayLength, rayColour);
+        }
+
+        RaycastHit2D hitBottom = Physics2D.Raycast(raycastOrigins.bottom, new Vector3(0, -1), rayLength, collisionMask);
+        if (hitBottom)
+        {
+            GameObject other = hitBottom.collider.gameObject;
+            int attitude = GetAttitude(other.GetComponent<Block>().type);
+
+            if (attitude != 0) { rayColour = attitude > 0 ? rayColourGood : rayColourBad; }
+            else { rayColour = rayColourNeutral; }
+            Debug.DrawRay(raycastOrigins.bottom, new Vector3(0, -1) * rayLength, rayColour);
+        }
     }
 
     // Returns the this block's attitude of type, value can be positive or negative.
