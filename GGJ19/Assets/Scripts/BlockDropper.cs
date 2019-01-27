@@ -79,5 +79,6 @@ public class BlockDropper : MonoBehaviour
     public void UpdateMoodScore()
     {
         scoreTracker.GetComponent<ScoreTracker>().UpdateScore(currentCats);
+        
     }
 }
