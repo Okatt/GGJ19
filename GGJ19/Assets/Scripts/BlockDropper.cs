@@ -20,7 +20,7 @@ public class BlockDropper : MonoBehaviour
     private void Awake()
     {
         scoreTracker = Instantiate(scoreTrackerPrefab, new Vector3(-5, 5, transform.position.z), Quaternion.identity);
-        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(5, -1, transform.position.z), Quaternion.identity);
+        blockFactory = Instantiate(blockFactoryPrefab, new Vector3(-8, -1, transform.position.z), Quaternion.identity);
     }
 
     void Start()

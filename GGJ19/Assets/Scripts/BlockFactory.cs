@@ -21,12 +21,12 @@ public class BlockFactory : MonoBehaviour
             if (random.NextDouble() < catRatio)
             {
                 int listNumber = random.Next(cats.Count);
-                GameObject newBlock = Instantiate(cats[listNumber], new Vector3(5, 3 + i, transform.position.z), Quaternion.identity);
+                GameObject newBlock = Instantiate(cats[listNumber], new Vector3(transform.position.x, 3 + i, transform.position.z), Quaternion.identity);
                 blocks.Enqueue(newBlock);
             } else
             {
                 int listNumber = random.Next(objects.Count);
-                GameObject newBlock = Instantiate(objects[listNumber], new Vector3(5, 3 + i, transform.position.z), Quaternion.identity);
+                GameObject newBlock = Instantiate(objects[listNumber], new Vector3(transform.position.x, 3 + i, transform.position.z), Quaternion.identity);
                 blocks.Enqueue(newBlock);
             }
         }
@@ -51,13 +51,13 @@ public class BlockFactory : MonoBehaviour
         if (random.NextDouble() < catRatio)
         {
             int listNumber = random.Next(cats.Count);
-            GameObject newBlock = Instantiate(cats[listNumber], new Vector3(5, 7, transform.position.z), Quaternion.identity);
+            GameObject newBlock = Instantiate(cats[listNumber], new Vector3(transform.position.x, 7, transform.position.z), Quaternion.identity);
             blocks.Enqueue(newBlock);
         }
         else
         {
             int listNumber = random.Next(objects.Count);
-            GameObject newBlock = Instantiate(objects[listNumber], new Vector3(5, 7, transform.position.z), Quaternion.identity);
+            GameObject newBlock = Instantiate(objects[listNumber], new Vector3(transform.position.x, 7, transform.position.z), Quaternion.identity);
             blocks.Enqueue(newBlock);
         }
     }

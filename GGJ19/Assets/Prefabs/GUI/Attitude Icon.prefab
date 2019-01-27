@@ -45,3 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attitudeElementPrefab: {fileID: 115058211535681278, guid: 531304389599bcd4898236be852400f7,
     type: 3}
+  backgroundElement: {fileID: 0}
+  foregroundElement: {fileID: 0}
