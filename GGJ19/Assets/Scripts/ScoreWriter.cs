@@ -26,7 +26,7 @@ public class ScoreWriter : MonoBehaviour
         if (score != newScore)
         {
             score = newScore;
-            scoreDisplay.text = "Mood: " + score;
+            scoreDisplay.text = score.ToString();
         }
 
     }
