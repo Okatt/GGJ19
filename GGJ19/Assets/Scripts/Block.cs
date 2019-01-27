@@ -8,12 +8,12 @@ public class Block : MonoBehaviour
 
     public GameObject particleHappyPrefab;
     public GameObject particleSadPrefab;
-    private GameObject particleHappy;
-    private GameObject particleSad;
     public BlockType type;
 
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
+    private GameObject particleHappy;
+    private GameObject particleSad;
 
     // Attitude
     public int mood;
