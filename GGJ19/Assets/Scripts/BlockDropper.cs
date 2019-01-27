@@ -75,7 +75,14 @@ public class BlockDropper : MonoBehaviour
     }
 
     public void UpdateMoodScore()
-    { 
+    {
+        for(var i = 0; i < currentCats.Count; i++)
+        {
+            if(!currentCats[i])
+            {
+                currentCats.RemoveAt(i);
+            }
+        }
         scoreTracker.GetComponent<ScoreTracker>().UpdateScore(currentCats);
         
     }
