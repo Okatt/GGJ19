@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6509881285912083349}
   - component: {fileID: 3896523241956526720}
   - component: {fileID: 584080388921105537}
+  - component: {fileID: 2151616417819608776}
   - component: {fileID: 5336486047852386626}
   m_Layer: 0
   m_Name: ParticleSad
@@ -4743,6 +4744,19 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &2151616417819608776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2218032316696297998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7651370c1a7be414b9851928cbf8b2eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particleSystem: {fileID: 0}
 --- !u!199 &5336486047852386626
 ParticleSystemRenderer:
   serializedVersion: 6
